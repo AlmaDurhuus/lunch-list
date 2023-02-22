@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
-const Form = () => {
+const Form = ({employees, setEmployees}) => {
   //We create a variable called data, which contains the array of employees
-  const [employees, setEmployees] = useState(JSON.parse(localStorage.getItem('employees')) || []);
+  //const [employees, setEmployees] = useState(JSON.parse(localStorage.getItem('employees')) || []);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
   
   useEffect (() => {
-    
     localStorage.setItem('employees', JSON.stringify(employees));
-
   }, [employees]);
 
   //Handles the delete button
