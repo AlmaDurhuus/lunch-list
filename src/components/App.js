@@ -32,7 +32,10 @@ function App() {
       </div>
 
       <div>
-       <CreateListButton/>
+       <CreateListButton
+        employees={employees}
+        setEmployees={setEmployees}
+       />
       </div>
       
 

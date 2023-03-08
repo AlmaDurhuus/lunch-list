@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 
 
-function CreateListButton() {
+function CreateListButton({ employees, setEmployees }) {
   const [showListCreator, setShowListCreator] = useState(false)
   const [listCreatorKey, setListCreatorKey] = useState(0);
 
@@ -13,13 +13,15 @@ function CreateListButton() {
   const handleButtonClick = () => {
     setShowListCreator(true)
     setListCreatorKey(listCreatorKey + 1);
-
   }
+
+
+
   return (
 
       <div>
         <button onClick={handleButtonClick}> Create List!</button>
-        {showListCreator || showListCreator === null ? <ListCreator key={listCreatorKey} /> : null}
+        {showListCreator || showListCreator === null ? <ListCreator key={listCreatorKey}   employees={employees} setEmployees={setEmployees}  /> : null}
       </div>
 
   );

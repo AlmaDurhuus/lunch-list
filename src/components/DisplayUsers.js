@@ -1,34 +1,64 @@
-import { useState } from "react";
+import React, { useState } from 'react';
 
 function DisplayUsers({ employees, setEmployees }) {
-    const [name, setName] = useState('')
-    const [mail, setMail] = useState('')
+  const [editingStates, setEditingStates] = useState(
+    employees.map(() => false)
+  );
 
+  const toggleEditing = (index) => {
+    setEditingStates((prevStates) => {
+      const newStates = [...prevStates];
+      newStates[index] = !newStates[index];
+      return newStates;
+    });
+  };
 
-    function updateUser(name, mail){
-
-    }
-
-
+  const handleDelete = email => {
+    //Filters out the employee that needs to be removed
+    const updatedData = employees.filter(item => item.email !== email);
+    setEmployees(updatedData);
+  };
 
   return (
     <div>
-      {employees.map((employee) => (
-        <form key={employee.mail} onSubmit={updateUser}>
+      {employees.map((employee, index) => (
+        <form className='employees' key={index} onSubmit={(e) => e.preventDefault()}>
+          {editingStates[index] ? (
             <input
-                type="text"
-                name="name"
-                value={employee.name}
-                onChange={(e) => setMail(e.target.value)}
-
-          />
-          <input
-            type="text"
-            name="email"
-            value={employee.email}
-            onChange={(e) => setMail(e.target.value)}
-          />
-            <button>Save</button>
+              type="text"
+              name="name"
+              value={employee.name}
+              onChange={(e) => {
+                const name = e.target.value;
+                const updatedEmployee = { ...employee, name };
+                const updatedEmployees = [...employees];
+                updatedEmployees[index] = updatedEmployee;
+                setEmployees(updatedEmployees);
+              }}
+            />
+          ) : (
+            <div>{employee.name}</div>
+          )}
+          {editingStates[index] ? (
+            <input
+              type="text"
+              name="email"
+              value={employee.email}
+              onChange={(e) => {
+                const email = e.target.value;
+                const updatedEmployee = { ...employee, email };
+                const updatedEmployees = [...employees];
+                updatedEmployees[index] = updatedEmployee;
+                setEmployees(updatedEmployees);
+              }}
+            />
+          ) : (
+            <div>{employee.email}</div>
+          )}
+          <button type="submit" onClick={() => toggleEditing(index)}>
+            {editingStates[index] ? 'Save' : 'Edit'} Profile
+          </button>
+          {editingStates[index] ? ( <button type='button' onClick={() => handleDelete(employee.email)}>Delete</button>) : ("")}
         </form>
       ))}
     </div>
