@@ -56,7 +56,7 @@ function DisplayUsers({ employees, setEmployees }) {
             <div>{employee.email}</div>
           )}
           <button type="submit" onClick={() => toggleEditing(index)}>
-            {editingStates[index] ? 'Save' : 'Edit'} Profile
+            {editingStates[index] ? 'Done' : 'Edit'} 
           </button>
           {editingStates[index] ? ( <button type='button' onClick={() => handleDelete(employee.email)}>Delete</button>) : ("")}
         </form>
