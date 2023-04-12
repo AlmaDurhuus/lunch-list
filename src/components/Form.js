@@ -21,6 +21,7 @@ const Form = ({employees, setEmployees}) => {
 
   return (
     <div>
+        <h2>Add employee</h2>
         <form className='newEmployee' onSubmit={handleSubmit}>
           <input
             type="text"
@@ -38,7 +39,7 @@ const Form = ({employees, setEmployees}) => {
             aria-label="email"
             required
           />
-              <input type="submit" value="Submit"></input>
+              <button type="submit" value="Submit">submit</button>
         </form>
 
   

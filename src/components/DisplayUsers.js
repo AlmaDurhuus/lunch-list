@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function DisplayUsers({ employees, setEmployees }) {
+function DisplayUsers({ employees, setEmployees, setDel }) {
   const [editingStates, setEditingStates] = useState(
     employees.map(() => false)
   );
@@ -16,11 +16,12 @@ function DisplayUsers({ employees, setEmployees }) {
   const handleDelete = email => {
     //Filters out the employee that needs to be removed
     const updatedData = employees.filter(item => item.email !== email);
+    setDel(true)
     setEmployees(updatedData);
   };
 
   return (
-    <div>
+    <div className='employeeList'>
       {employees.map((employee, index) => (
         <form className='employees' key={index} onSubmit={(e) => e.preventDefault()}>
           {editingStates[index] ? (
@@ -37,7 +38,7 @@ function DisplayUsers({ employees, setEmployees }) {
               }}
             />
           ) : (
-            <div>{employee.name}</div>
+            <div className='txt'>{employee.name}</div>
           )}
           {editingStates[index] ? (
             <input
@@ -53,12 +54,11 @@ function DisplayUsers({ employees, setEmployees }) {
               }}
             />
           ) : (
-            <div>{employee.email}</div>
+            <div className='txt'>{employee.email}</div>
           )}
-          <button type="submit" onClick={() => toggleEditing(index)}>
-            {editingStates[index] ? 'Done' : 'Edit'} 
-          </button>
-          {editingStates[index] ? ( <button type='button' onClick={() => handleDelete(employee.email)}>Delete</button>) : ("")}
+          {editingStates[index] ? 
+          ( <div className='editBtn'><button type="submit" onClick={() => toggleEditing(index)}>Done</button><button type='button' onClick={() => handleDelete(employee.email)}>Delete</button> </div> ) 
+          : ( <button type="submit" onClick={() => toggleEditing(index)}>Edit</button>)}
         </form>
       ))}
     </div>

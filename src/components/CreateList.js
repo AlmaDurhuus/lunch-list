@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-const ListCreator = ({ employees, setEmployees }) => {
+
+const CreateList = ({ employees, setEmployees, setDel, del }) => {
  
   const [employeesIndex2, setEmployeesIndex2] = useState([])
 
@@ -40,6 +41,7 @@ const ListCreator = ({ employees, setEmployees }) => {
 
   //Generating the list
   const generatedList = () =>{
+    setDel(false)
     var empLength = employees.length
 
     //Checks if employees is even or odd
@@ -69,21 +71,33 @@ const ListCreator = ({ employees, setEmployees }) => {
     setEmployeesIndex2(newArray)
 
   }
-
-
+  function currentWeek(){
+    const currentDate = new Date();
+    const startDate = new Date(currentDate.getFullYear(), 0, 1);
+    var days = Math.floor((currentDate - startDate) /
+        (24 * 60 * 60 * 1000));
+          
+    var weekNumber = Math.ceil(days / 7);
+    return weekNumber
+}
+  var week=currentWeek()
   return (
     <div>
       <h2>List Creator</h2>
       <button onClick={generatedList}>Create list</button>
-      {employeesIndex2.map((num, index) => (
-        <div key={index }> Week {index +1}:
-                <p >person1: {employees[num.person1].name}</p>
-                <p >person2: {employees[num.person2].name}</p>
-
-        </div>
-      ))}
+      {del? <div></div>
+      : 
+      <div>
+        {employeesIndex2.map((num, index) => (
+          <div key={index}> Week {week +=1}:
+                  <p >person1: {employees[num.person1].name}</p>
+                  <p >person2: {employees[num.person2].name}</p>
+          </div>
+        ))}
+      </div>}
+  
     </div>
   );
 };
 
-export default ListCreator;
+export default CreateList;
