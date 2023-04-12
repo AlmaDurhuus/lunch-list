@@ -71,3 +71,8 @@ button{
 .listContainer{
  flex-direction: row;
 }
+
+td, th{
+    border: white solid 1px;
+    padding: 20px;
+}

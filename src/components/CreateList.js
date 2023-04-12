@@ -87,14 +87,23 @@ const CreateList = ({ employees, setEmployees, setDel, del }) => {
       <button onClick={generatedList}>Create list</button>
       {del? <div></div>
       : 
-      <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Week</th>
+            <th>Person 1</th>
+            <th>Person 2</th>
+          </tr>
+        </thead>
+        <tbody>
         {employeesIndex2.map((num, index) => (
-          <div key={index}> Week {week +=1}:
-                  <p >person1: {employees[num.person1].name}</p>
-                  <p >person2: {employees[num.person2].name}</p>
-          </div>
-        ))}
-      </div>}
+              <tr key={index}> 
+                <td>{week +=1}</td>
+                <td>{employees[num.person1].name}</td>
+                <td>{employees[num.person2].name}</td>
+          </tr>
+        ))}</tbody>
+      </table>}
   
     </div>
   );
