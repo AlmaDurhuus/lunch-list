@@ -122,6 +122,16 @@ const sendEmail = (e) => {
 
   var week=currentWeek()
 
+  //Styling for the email
+  const styling = {
+    color: 'black',
+    outlineStyle: 'solid',
+    outlineColor: 'black',
+    outlineWidth: '2px',
+    padding: '20px',
+
+}
+
   //Generating the list once the button is pressed
   return (
     <div>
@@ -130,9 +140,9 @@ const sendEmail = (e) => {
         {del? <div></div>
         : 
         <div>
-          <table ref={content}>
-            <thead>
-              <tr>
+          <table ref={content} style={{width:'100%', background:'white'}} >
+            <thead >
+              <tr style={styling}>
                 <th>Week</th>
                 <th>Person 1</th>
                 <th>Person 2</th>
@@ -140,10 +150,10 @@ const sendEmail = (e) => {
             </thead>
             <tbody>
             {employeesIndex2.map((num, index) => (
-                  <tr key={index}> 
+                  <tr key={index} style={styling}> 
                     <td>{week +=1}</td>
-                    <td>{employees[num.person1].name}</td>
-                    <td>{employees[num.person2].name}</td>
+                    <td style={{background: employees[num.person1].color}}>{employees[num.person1].name}</td>
+                    <td style={{background: employees[num.person2].color}}>{employees[num.person2].name}</td>
               </tr>
             ))}</tbody>
           </table>

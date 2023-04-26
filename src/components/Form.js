@@ -5,6 +5,7 @@ const Form = ({employees, setEmployees}) => {
   //const [employees, setEmployees] = useState(JSON.parse(localStorage.getItem('employees')) || []);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [color, setColor] = useState("")
 
   //makes sure that the local storage is updated
   useEffect (() => {
@@ -14,9 +15,10 @@ const Form = ({employees, setEmployees}) => {
   //Handles when submitting a new employee
   const handleSubmit = (e) => {
     e.preventDefault();
-    setEmployees([...employees, {name, email}]);
+    setEmployees([...employees, {name, email, color}]);
     setName("");
     setEmail("");
+    setColor("");
   }
 
 
@@ -39,6 +41,11 @@ const Form = ({employees, setEmployees}) => {
             placeholder="Email"
             aria-label="email"
             required
+          />
+          <input type='color' 
+            value={color}
+            onChange={(e) => setColor(e.target.value)}
+            style={{background : color}}
           />
               <button type="submit" value="Submit">submit</button>
         </form>

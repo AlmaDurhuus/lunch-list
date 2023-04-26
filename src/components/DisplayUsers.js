@@ -25,7 +25,7 @@ function DisplayUsers({ employees, setEmployees, setDel }) {
   return (
     <div className='employeeList'>
       {employees.map((employee, index) => (
-        <form className='employees' key={index} onSubmit={(e) => e.preventDefault()}>
+        <form className='employees' key={index} onSubmit={(e) => e.preventDefault()} style={{background: employee.color}}>
           {editingStates[index] ? (
             <input
               type="text"
@@ -58,6 +58,22 @@ function DisplayUsers({ employees, setEmployees, setDel }) {
           ) : (
             <div className='txt'>{employee.email}</div>
           )}
+          {editingStates[index] ? (
+          <input
+            type="color"
+            name="color"
+            value={employee.color}
+            onChange={(e) => {
+              const color = e.target.value;
+              const updatedEmployee = { ...employee, color };
+              const updatedEmployees = [...employees];
+              updatedEmployees[index] = updatedEmployee;
+              setEmployees(updatedEmployees);
+            }}
+          />
+        ) : null}
+
+
           {editingStates[index] ? 
           ( <div className='editBtn'><button type='button' onClick={() => handleDelete(employee.email)}>Delete</button> <button type="submit" onClick={() => toggleEditing(index)}>Done</button> </div> ) 
           : ( <button type="submit" onClick={() => toggleEditing(index)}>Edit</button>)}
