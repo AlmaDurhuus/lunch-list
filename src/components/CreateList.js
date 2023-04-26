@@ -124,6 +124,8 @@ const sendEmail = (e) => {
 
   //Styling for the email
   const styling = {
+    textAlign: 'center',
+    fontSize: '30px',
     color: 'black',
     outlineStyle: 'solid',
     outlineColor: 'black',
@@ -143,9 +145,9 @@ const sendEmail = (e) => {
           <table ref={content} style={{width:'100%', background:'white'}} >
             <thead >
               <tr style={styling}>
-                <th>Week</th>
-                <th>Person 1</th>
-                <th>Person 2</th>
+                <th>Week  </th>
+                <th>Person 1  </th>
+                <th>Person 2  </th>
               </tr>
             </thead>
             <tbody>

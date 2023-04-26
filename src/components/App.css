@@ -7,7 +7,7 @@ body{
   
   background-color: rgb(38, 38, 49);
 
-
+  font-size: 16px;
   color: rgb(255, 252, 252);
 }
 
@@ -78,4 +78,6 @@ button{
 td, th{
     border: rgb(255, 255, 255) solid 1px;
     padding: 20px;
+    font-size: 16px;
+
   }
