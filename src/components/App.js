@@ -5,15 +5,12 @@ import DisplayUsers  from "./DisplayUsers";
 import React, { useState } from 'react';
 
 
-
-
-
-
-
 function App() {
+  // Get employees from local storage
   const [employees, setEmployees] = useState(JSON.parse(localStorage.getItem('employees')) || []);
-  
-  const [del, setDel] = useState(false)
+
+  //Stop rendering lunch list if user is deleted
+  const [del, setDel] = useState(true)
 
   return (
     <div className='container'>
@@ -29,7 +26,6 @@ function App() {
        />
       </div>
   
-
       <div className='div3 aside'>
         <Form
         employees={employees}
@@ -46,13 +42,10 @@ function App() {
         />
       </div>
 
-
-    
-      
-
     </div>
 
   );
+
 }
 
 export default App;

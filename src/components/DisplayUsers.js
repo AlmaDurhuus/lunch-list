@@ -5,6 +5,7 @@ function DisplayUsers({ employees, setEmployees, setDel }) {
     employees.map(() => false)
   );
 
+  //Toggle between editing and text
   const toggleEditing = (index) => {
     setEditingStates((prevStates) => {
       const newStates = [...prevStates];
@@ -13,6 +14,7 @@ function DisplayUsers({ employees, setEmployees, setDel }) {
     });
   };
 
+  //Delete the user from local storage
   const handleDelete = email => {
     //Filters out the employee that needs to be removed
     const updatedData = employees.filter(item => item.email !== email);
@@ -57,7 +59,7 @@ function DisplayUsers({ employees, setEmployees, setDel }) {
             <div className='txt'>{employee.email}</div>
           )}
           {editingStates[index] ? 
-          ( <div className='editBtn'><button type="submit" onClick={() => toggleEditing(index)}>Done</button><button type='button' onClick={() => handleDelete(employee.email)}>Delete</button> </div> ) 
+          ( <div className='editBtn'><button type='button' onClick={() => handleDelete(employee.email)}>Delete</button> <button type="submit" onClick={() => toggleEditing(index)}>Done</button> </div> ) 
           : ( <button type="submit" onClick={() => toggleEditing(index)}>Edit</button>)}
         </form>
       ))}

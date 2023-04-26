@@ -6,11 +6,12 @@ const Form = ({employees, setEmployees}) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  
+  //makes sure that the local storage is updated
   useEffect (() => {
     localStorage.setItem('employees', JSON.stringify(employees));
   }, [employees]);
 
+  //Handles when submitting a new employee
   const handleSubmit = (e) => {
     e.preventDefault();
     setEmployees([...employees, {name, email}]);
