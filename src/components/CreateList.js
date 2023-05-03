@@ -11,12 +11,13 @@ const CreateList = ({ employees, setEmployees, setDel, del }) => {
   // create the actual list of pairs, max attempts is in case of infinite loop
   function generatePairs(array, weeks, maxAttempts = 100) {
 
-    //First we shuffle the array
-    const shuffledArray = array.sort(() => Math.random() - 0.5);
-
+    //First we put the array into a new variable
+    var arr = array
+    
     // count how many times the person has been chosen
-    const counters = shuffledArray.reduce((obj, person) => ({ ...obj, [person]: 0 }), {});
+    const counters = arr.reduce((obj, person) => ({ ...obj, [person]: 0 }), {});
     const pairs = []; //Creating a list of pairs
+
     while (pairs.length < weeks) {
       let pair;
       let attempt = 0;
@@ -27,18 +28,18 @@ const CreateList = ({ employees, setEmployees, setDel, del }) => {
           throw new Error('Failed to generate pairs');
         }
         //Choose two random
-        const person1 = Math.floor(Math.random() * shuffledArray.length);
-        const person2 = Math.floor(Math.random() * shuffledArray.length);
+        const person1 = Math.floor(Math.random() * arr.length);
+        const person2 = Math.floor(Math.random() * arr.length);
 
         //If they are the same person, redo the while
         if(person1 === person2){continue;}
 
-        //Check if they have worked together the week before
-        const lastPair = pairs[pairs.length - 1];
-        const workedTogetherLastWeek = lastPair && (lastPair.person1 === person1 || lastPair.person1 === person2 || lastPair.person2 === person1 || lastPair.person2 === person2);
+       // Check if they have worked together the week before
+      const workedTogetherThisWeek = pairs.some(pair => (pair.person1 === person1 && pair.person2 === person2) || (pair.person1 === person2 && pair.person2 === person1));
+
 
         // Check if any have been more than three times, if so redo the while
-        if (workedTogetherLastWeek || counters[person1] >= 3 || counters[person2] >= 3) {continue;}
+        if (workedTogetherThisWeek || counters[person1] >= 3 || counters[person2] >= 3) {continue;}
 
         //Creates a pair of person1 and person2
         pair = { person1, person2 };
@@ -46,7 +47,6 @@ const CreateList = ({ employees, setEmployees, setDel, del }) => {
         counters[person2]++;
 
       } while (!pair); //repeats the do code until a pair is made
-
       pairs.push(pair);//Pushes to the pair array
     }
     return pairs;
@@ -59,23 +59,18 @@ const CreateList = ({ employees, setEmployees, setDel, del }) => {
     var empLength = employees.length
 
     //Checks if employees is even or odd
-    if(Math.abs(employees.length % 2) === 1){ empLength = employees.length-1}
+    //if(Math.abs(employees.length % 2) === 1){ empLength = employees.length-1}
 
     //Calculate the max amount of weeks, from the amount of employees
     var maxWeeks = Math.floor((3*(empLength/2))/2)
-    var employeesNeeded;
     let weeks = 0
 
     // checks if maxWeeks is above or bellow 5 
     if(maxWeeks >= 5){
       weeks = 5
-      if(empLength < 10){
-          employeesNeeded = empLength
-        }else{employeesNeeded = 10}
     }
     if (maxWeeks < 5) {
       weeks = maxWeeks
-      employeesNeeded = empLength
     }        
     var array = []
     //Creating an array of indexes

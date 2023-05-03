@@ -5,7 +5,9 @@ const Form = ({employees, setEmployees}) => {
   //const [employees, setEmployees] = useState(JSON.parse(localStorage.getItem('employees')) || []);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [color, setColor] = useState("#FFFFFF")
+
+  const randomColor = Math.floor(Math.random()*16777215).toString(16)
+  const [color, setColor] = useState("#" + randomColor)
 
   //makes sure that the local storage is updated
   useEffect (() => {
@@ -18,7 +20,7 @@ const Form = ({employees, setEmployees}) => {
     setEmployees([...employees, {name, email, color}]);
     setName("");
     setEmail("");
-    setColor("#FFFFFF");
+    setColor("#" + randomColor  );
   }
 
 
