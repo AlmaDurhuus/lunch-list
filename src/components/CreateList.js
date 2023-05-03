@@ -106,7 +106,7 @@ const sendEmail = (e) => {
   };
 
   //Insert your own info emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams, 'YOUR_PUBLIC_KEY')
-  emailjs.send('service_uphkigm', 'template_p3nmhzs', templateParams, 'knK2PlgvaExTvsQYn')
+  emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams, 'YOUR_PUBLIC_KEY')
     .then((result) => {
         console.log(result.text);
     }, (error) => {
