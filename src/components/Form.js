@@ -5,7 +5,7 @@ const Form = ({employees, setEmployees}) => {
   //const [employees, setEmployees] = useState(JSON.parse(localStorage.getItem('employees')) || []);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [color, setColor] = useState("")
+  const [color, setColor] = useState("#FFFFFF")
 
   //makes sure that the local storage is updated
   useEffect (() => {
@@ -18,7 +18,7 @@ const Form = ({employees, setEmployees}) => {
     setEmployees([...employees, {name, email, color}]);
     setName("");
     setEmail("");
-    setColor("");
+    setColor("#FFFFFF");
   }
 
 
